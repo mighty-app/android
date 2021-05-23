@@ -21,7 +21,9 @@ class OnboardingActivity : ComponentActivity() {
 
         setContent {
             MightyTheme {
-                OnboardingContent()
+                OnboardingContent {
+                    finish()
+                }
             }
         }
     }

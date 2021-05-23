@@ -2,12 +2,15 @@ package cc.mightyapp.mighty.ui.main
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @Composable
 fun MainContent(userId: String, token: String) {
+
+    Text("Mighty")
 //    val viewModels: RealViewModels = GetViewModels(userId = userId, token = token)
 //
 //    val isLoading: Boolean by viewModels.mainViewModel.isLoading.collectAsState()

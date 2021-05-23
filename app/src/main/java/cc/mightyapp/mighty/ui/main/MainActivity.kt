@@ -34,11 +34,11 @@ class MainActivity : ComponentActivity() {
         val token = intent.getStringExtra(TOKEN)
 
         setContent {
-            ProvideWindowInsets {
-                MightyTheme {
-                    MainContent(userId = userId!!, token = token!!)
-                }
+
+            MightyTheme {
+                MainContent(userId = userId!!, token = token!!)
             }
+
         }
 
     }
