@@ -15,11 +15,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.mightyapp.mighty.R
 import cc.mightyapp.mighty.launcher.data.entities.LaunchDestination
 import cc.mightyapp.mighty.launcher.ui.presenter.LauncherViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import timber.log.Timber
+import kotlinx.coroutines.delay
 
-private const val SplashWaitTime: Long = 1250
+private const val SplashWaitTime: Long = 1000
 
 data class LaunchInfo(
     val userId: String,
@@ -35,15 +33,14 @@ fun LauncherView(
     val viewModel: LauncherViewModel = viewModel()
 
     val isDoneLoading by viewModel.isDoneLoading.collectAsState()
-    val hasError by viewModel.hasError.collectAsState()
-
     val state by viewModel.state.collectAsState()
     val launchDestination by viewModel.destination.collectAsState()
 
     ShowSplash(modifier = modifier)
 
     if (isDoneLoading) {
-        LaunchedEffect(launchDestination) {
+        LaunchedEffect(Unit) {
+            delay(SplashWaitTime)
             onComplete(
                 LaunchInfo(
                     userId = state.userId,
@@ -67,12 +64,5 @@ fun ShowSplash(modifier: Modifier) {
             painter = painterResource(id = R.drawable.ic_mighty),
             contentDescription = null
         )
-    }
-}
-
-@Composable
-fun Navigate(onComplete: (LaunchInfo) -> Unit, launchInfo: LaunchInfo) {
-    LaunchedEffect(Unit) {
-        onComplete(launchInfo)
     }
 }

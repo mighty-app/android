@@ -6,10 +6,7 @@ import cc.mightyapp.mighty.common.data.entities.RequestResult
 import cc.mightyapp.mighty.launcher.data.domain.ReadTokenUseCase
 import cc.mightyapp.mighty.launcher.data.domain.ReadUserIdUseCase
 import cc.mightyapp.mighty.launcher.data.entities.LaunchDestination
-import cc.mightyapp.mighty.launcher.data.interactor.RealLauncherInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -17,7 +14,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LauncherViewModel @Inject constructor(
-    private val interactor: RealLauncherInteractor,
     private val readUserIdUseCase: ReadUserIdUseCase,
     private val readTokenUseCase: ReadTokenUseCase,
 ) : ViewModel() {
@@ -50,6 +46,8 @@ class LauncherViewModel @Inject constructor(
             }.catch { e ->
                 Timber.d(e)
                 hasError.value = true
+                _destination.value = LaunchDestination.ONBOARDING
+                isDoneLoading.value = true
             }.collect {
                 _state.value = it
                 _destination.value = LaunchDestination.MAIN
@@ -58,39 +56,4 @@ class LauncherViewModel @Inject constructor(
 
         }
     }
-
-    fun loadDestination() {
-
-        _destination.value = LaunchDestination.MAIN
-//        if (token.isNullOrEmpty()) _destination.value = LaunchDestination.ONBOARDING
-//
-//        else {
-//            viewModelScope.launch {
-//                val isValid = validateTokenUseCase(ValidateTokenInput(token))
-//
-//                Do exhaustive when(isValid) {
-//                    is RequestResult.Success -> _destination.value = LaunchDestination.MAIN
-//                    else -> _destination.value = LaunchDestination.ONBOARDING
-//                }
-//            }
-//        }
-    }
-
-    private fun getUserIdAsync(): Deferred<String> {
-        return viewModelScope.async { interactor.getUserId() }
-    }
-
-    private fun getTokenAsync(): Deferred<String> {
-        return viewModelScope.async { interactor.getToken() }
-    }
-
-    private fun setState(nextState: LauncherViewState) {
-        _state.value = nextState
-    }
-
-    private fun setDestination(nextDestination: LaunchDestination) {
-        _destination.value = nextDestination
-    }
-
-
 }
