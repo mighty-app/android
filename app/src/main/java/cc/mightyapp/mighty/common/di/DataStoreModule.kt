@@ -5,8 +5,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import cc.mightyapp.mighty.launcher.data.repository.DataStoreOperations
 import cc.mightyapp.mighty.launcher.data.repository.DataStoreRepository
+import cc.mightyapp.mighty.launcher.data.repository.RealDataStoreRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +30,6 @@ object DataStoreModule {
 
     @Provides
     @Singleton
-    fun provideDataStoreRepository(dataStore: DataStore<Preferences>): DataStoreOperations =
-        DataStoreRepository(dataStore)
+    fun provideDataStoreRepository(dataStore: DataStore<Preferences>): DataStoreRepository =
+        RealDataStoreRepository(dataStore)
 }

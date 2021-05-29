@@ -11,6 +11,8 @@ import androidx.compose.runtime.*
 fun MainContent(userId: String, token: String) {
 
     Text("Mighty")
+    Text("Token = $token")
+    Text("User Id = $userId")
 //    val viewModels: RealViewModels = GetViewModels(userId = userId, token = token)
 //
 //    val isLoading: Boolean by viewModels.mainViewModel.isLoading.collectAsState()

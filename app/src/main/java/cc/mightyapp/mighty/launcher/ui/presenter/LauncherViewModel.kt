@@ -2,115 +2,95 @@ package cc.mightyapp.mighty.launcher.ui.presenter
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cc.mightyapp.mighty.common.data.entities.Result
-import cc.mightyapp.mighty.common.data.entities.data
+import cc.mightyapp.mighty.common.data.entities.RequestResult
 import cc.mightyapp.mighty.launcher.data.domain.ReadTokenUseCase
 import cc.mightyapp.mighty.launcher.data.domain.ReadUserIdUseCase
-import cc.mightyapp.mighty.launcher.data.domain.ValidateTokenUseCase
 import cc.mightyapp.mighty.launcher.data.entities.LaunchDestination
-import cc.mightyapp.mighty.launcher.data.entities.ValidateTokenInput
+import cc.mightyapp.mighty.launcher.data.interactor.RealLauncherInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class LauncherViewModel @Inject constructor(
+    private val interactor: RealLauncherInteractor,
     private val readUserIdUseCase: ReadUserIdUseCase,
     private val readTokenUseCase: ReadTokenUseCase,
-    private val validateTokenUseCase: ValidateTokenUseCase
 ) : ViewModel() {
+
+    val hasError = MutableStateFlow(false)
+    val isDoneLoading = MutableStateFlow(false)
 
     private val _state = MutableStateFlow(LauncherViewState())
     val state: StateFlow<LauncherViewState>
         get() = _state
 
+    private val _destination = MutableStateFlow(LaunchDestination.MAIN)
+    val destination: StateFlow<LaunchDestination>
+        get() = _destination
+
     init {
         loadState()
     }
 
-    private fun setState(userId: String, token: String, launchDestination: LaunchDestination) {
-        _state.value = LauncherViewState(
-            userId = userId,
-            token = token,
-            launchDestination = launchDestination
-        )
-    }
-
-    private fun updateUserId(userId: String) {
-        _state.value = LauncherViewState(
-            userId = userId,
-            token = state.value.token,
-            launchDestination = state.value.launchDestination
-        )
-    }
-
-    private fun updateToken(token: String) {
-        _state.value = LauncherViewState(
-            userId = state.value.userId,
-            token = token,
-            launchDestination = state.value.launchDestination
-        )
-    }
-
     private fun loadState() {
-        loadUserId()
-        loadToken()
-    }
-
-    fun handleToken() {
-        var isValid = false
-        var isLoading = true
-
         viewModelScope.launch {
-            isValid = validateToken(state.value.token)
-            isLoading = false
-        }
-
-        if (isValid && !isLoading) {
-            setState(
-                userId = state.value.userId,
-                token = state.value.token,
-                launchDestination = LaunchDestination.MAIN
-            )
-        }
-    }
-
-    private fun loadUserId() {
-        viewModelScope.launch {
-            readUserIdUseCase(Unit).collect { it ->
-                if (it is Result.Success) {
-                    updateUserId(it.data)
-                }
+            combine(
+                readUserIdUseCase(Unit),
+                readTokenUseCase(Unit)
+            ) { userId, token ->
+                LauncherViewState(
+                    userId = if (userId is RequestResult.Success) userId.payload else "",
+                    token = if (token is RequestResult.Success) token.payload else ""
+                )
+            }.catch { e ->
+                Timber.d(e)
+                hasError.value = true
+            }.collect {
+                _state.value = it
+                _destination.value = LaunchDestination.MAIN
+                isDoneLoading.value = true
             }
+
         }
     }
 
-    private fun loadToken() {
-        viewModelScope.launch {
-            readTokenUseCase(Unit).collect { it ->
-                if (it is Result.Success) {
-                    val isValid = validateToken(it.data)
-                }
-            }
-        }
+    fun loadDestination() {
+
+        _destination.value = LaunchDestination.MAIN
+//        if (token.isNullOrEmpty()) _destination.value = LaunchDestination.ONBOARDING
+//
+//        else {
+//            viewModelScope.launch {
+//                val isValid = validateTokenUseCase(ValidateTokenInput(token))
+//
+//                Do exhaustive when(isValid) {
+//                    is RequestResult.Success -> _destination.value = LaunchDestination.MAIN
+//                    else -> _destination.value = LaunchDestination.ONBOARDING
+//                }
+//            }
+//        }
+    }
+
+    private fun getUserIdAsync(): Deferred<String> {
+        return viewModelScope.async { interactor.getUserId() }
+    }
+
+    private fun getTokenAsync(): Deferred<String> {
+        return viewModelScope.async { interactor.getToken() }
+    }
+
+    private fun setState(nextState: LauncherViewState) {
+        _state.value = nextState
+    }
+
+    private fun setDestination(nextDestination: LaunchDestination) {
+        _destination.value = nextDestination
     }
 
 
-    private fun validateToken(token: String): Boolean {
-        var isValid = false
-
-        viewModelScope.launch {
-            val response = validateTokenUseCase(ValidateTokenInput(token = token))
-            val data = response.data!!
-            Timber.d("Token from server ${data.token}")
-            Timber.d("Token from data store $token")
-            isValid = data.token.isNotEmpty()
-        }
-
-        return isValid
-    }
 }
