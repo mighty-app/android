@@ -5,21 +5,34 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.mightyapp.mighty.main.main.ui.composables.MightyViewModels
 import cc.mightyapp.mighty.main.main.ui.composables.generateMightyViewModels
+import cc.mightyapp.mighty.main.main.ui.presenter.MainViewModel
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @Composable
 fun MainContent(userId: String, token: String) {
 
-    val mightyViewModels: MightyViewModels = generateMightyViewModels(userId = userId, token = token)
+    val mainViewModel: MainViewModel = viewModel()
+    mainViewModel.mainInit(userId = userId, token = token)
 
+    val user by mainViewModel.user.collectAsState()
 
-    Column {
-        Text("Mighty")
-        Text("Token = $token")
-        Text("User Id = $userId")
+    if (user.isLoggedIn.not()) {
+        return Column {
+            Text("Mighty")
+            Text("Token = $token")
+            Text("User Id = $userId")
+        }
+    }
+
+    if (user.isLoggedIn) {
+        return Column {
+            Text(user.firstName)
+            Text(user.lastName)
+        }
     }
 
 

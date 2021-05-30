@@ -23,8 +23,16 @@ class MainViewModel @Inject constructor(
     val user: StateFlow<User>
         get() = _user
 
+    private val _isDoneLoading = MutableStateFlow(user.value.isLoggedIn)
+    val isDoneLoading: StateFlow<Boolean>
+        get() = _isDoneLoading
+
     fun mainInit(userId: String, token: String) {
         loadUser(userId = userId, token = token)
+    }
+
+    fun setIsDoneLoading(bool: Boolean) {
+        _isDoneLoading.value = bool
     }
 
     private fun loadUser(userId: String, token: String) {
