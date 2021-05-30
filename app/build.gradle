@@ -88,6 +88,9 @@ dependencies {
     implementation 'androidx.compose.animation:animation:1.0.0-SNAPSHOT'
     kapt 'com.google.dagger:hilt-android-compiler:2.35.1'
 
+    // Icons
+    implementation("br.com.devsrsouza.compose.icons.android:font-awesome:0.2.0")
+
     // Moshi
     implementation 'com.squareup.moshi:moshi:1.11.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.11.0'

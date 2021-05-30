@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.mightyapp.mighty.main.exercises.ui.presenter.ExercisesViewModel
 import cc.mightyapp.mighty.main.main.ui.composables.MightyViewModels
 import cc.mightyapp.mighty.main.main.ui.composables.generateMightyViewModels
 import cc.mightyapp.mighty.main.main.ui.presenter.MainViewModel
@@ -17,6 +18,8 @@ fun MainContent(userId: String, token: String) {
 
     val mainViewModel: MainViewModel = viewModel()
     mainViewModel.mainInit(userId = userId, token = token)
+
+    val exercisesViewModel: ExercisesViewModel = viewModel()
 
     val user by mainViewModel.user.collectAsState()
 
