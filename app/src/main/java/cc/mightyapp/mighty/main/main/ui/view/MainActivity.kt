@@ -1,4 +1,4 @@
-package cc.mightyapp.mighty.main
+package cc.mightyapp.mighty.main.main.ui.view
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import cc.mightyapp.mighty.common.theme.MightyTheme
-import cc.mightyapp.mighty.ui.main.MainContent
+import cc.mightyapp.mighty.main.main.ui.composables.MainContent
 import dagger.hilt.android.AndroidEntryPoint
 
 const val USER_ID = "cc.mightyapp.mighty.ui.main.USER_ID"

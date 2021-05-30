@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import cc.mightyapp.mighty.common.theme.MightyTheme
 import cc.mightyapp.mighty.launcher.data.entities.LaunchDestination
 import cc.mightyapp.mighty.launcher.ui.composables.LauncherView
-import cc.mightyapp.mighty.main.launchMainActivity
+import cc.mightyapp.mighty.main.main.ui.view.launchMainActivity
 import cc.mightyapp.mighty.onboarding.ui.launchOnboardingActivity
 import dagger.hilt.android.AndroidEntryPoint
 

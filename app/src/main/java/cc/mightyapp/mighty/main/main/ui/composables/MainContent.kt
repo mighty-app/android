@@ -1,18 +1,28 @@
-package cc.mightyapp.mighty.ui.main
+package cc.mightyapp.mighty.main.main.ui.composables
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import cc.mightyapp.mighty.main.main.ui.composables.MightyViewModels
+import cc.mightyapp.mighty.main.main.ui.composables.generateMightyViewModels
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @Composable
 fun MainContent(userId: String, token: String) {
 
-    Text("Mighty")
-    Text("Token = $token")
-    Text("User Id = $userId")
+    val mightyViewModels: MightyViewModels = generateMightyViewModels(userId = userId, token = token)
+
+
+    Column {
+        Text("Mighty")
+        Text("Token = $token")
+        Text("User Id = $userId")
+    }
+
+
 //    val viewModels: RealViewModels = GetViewModels(userId = userId, token = token)
 //
 //    val isLoading: Boolean by viewModels.mainViewModel.isLoading.collectAsState()

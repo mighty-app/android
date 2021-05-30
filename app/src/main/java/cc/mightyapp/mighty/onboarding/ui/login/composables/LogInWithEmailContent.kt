@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import cc.mightyapp.mighty.common.util.Defaults
-import cc.mightyapp.mighty.main.launchMainActivity
+import cc.mightyapp.mighty.main.main.ui.view.launchMainActivity
 import cc.mightyapp.mighty.onboarding.data.entities.LogInWithEmailInput
 import cc.mightyapp.mighty.onboarding.ui.login.presenter.LogInWithEmailViewModel
 import cc.mightyapp.mighty.onboarding.ui.login.presenter.LogInWithEmailViewState

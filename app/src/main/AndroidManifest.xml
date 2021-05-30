@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Mighty">
 
         <activity android:name=".onboarding.ui.OnboardingActivity" />
-        <activity android:name=".main.MainActivity" />
+        <activity android:name=".main.main.ui.view.MainActivity" />
         <activity android:name=".launcher.ui.view.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
