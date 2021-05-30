@@ -13,5 +13,5 @@ import dagger.hilt.components.SingletonComponent
 object UserModule {
 
     @Provides
-    fun provideUserService(api: MightyApi): UserService = RealUserService(api)
+    fun provideUserService(api: MightyApi): UserService = RealUserService(api = api)
 }
