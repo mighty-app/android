@@ -28,9 +28,7 @@ class ExercisesViewModel @Inject constructor(
 
     private fun loadExercises() {
         viewModelScope.launch {
-            val exercises = withContext(Dispatchers.Default) {
-                getExercisesUseCase(Unit)
-            }
+            val exercises = withContext(Dispatchers.Default) { getExercisesUseCase(Unit) }
 
             if (exercises is RequestResult.Success) _exercises.value = exercises.payload
         }

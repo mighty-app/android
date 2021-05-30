@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MightyTheme {
                 ProvideWindowInsets {
-                    MainContent(userId = userId!!, token = token!!)
+                    MainContent(userId = userId!!, token = token!!, context = this)
                 }
             }
 
