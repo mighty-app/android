@@ -3,13 +3,16 @@ package cc.mightyapp.mighty.main.main.ui.composables
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.mightyapp.mighty.main.exercises.ui.composables.ExercisesContent
 import cc.mightyapp.mighty.main.exercises.ui.presenter.ExercisesViewModel
-import cc.mightyapp.mighty.main.main.ui.composables.MightyViewModels
-import cc.mightyapp.mighty.main.main.ui.composables.generateMightyViewModels
+import cc.mightyapp.mighty.main.main.data.entities.MightyTabs
 import cc.mightyapp.mighty.main.main.ui.presenter.MainViewModel
+import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
@@ -21,52 +24,31 @@ fun MainContent(userId: String, token: String) {
 
     val exercisesViewModel: ExercisesViewModel = viewModel()
 
-    val user by mainViewModel.user.collectAsState()
+    val (selectedTab, setSelectedTab) = remember { mutableStateOf(MightyTabs.Dashboard) }
+    val tabs = MightyTabs.values()
 
-    if (user.isLoggedIn.not()) {
-        return Column {
-            Text("Mighty")
-            Text("Token = $token")
-            Text("User Id = $userId")
+    Scaffold(
+        backgroundColor = MaterialTheme.colors.primarySurface,
+        topBar = { MightyTopBar() },
+        bottomBar = {
+            BottomNavigation {
+                tabs.forEach { tab ->
+                    BottomNavigationItem(
+                        icon = { Icon(imageVector = tab.icon, contentDescription = null) },
+                        label = { Text(text = stringResource(id = tab.title)) },
+                        selected = tab == selectedTab,
+                        onClick = { setSelectedTab(tab) },
+                    )
+                }
+            }
+        }
+    ) {
+        when (selectedTab) {
+            MightyTabs.Exercises -> ExercisesContent(
+                mainViewModel = mainViewModel,
+                exercisesViewModel = exercisesViewModel
+            )
         }
     }
 
-    if (user.isLoggedIn) {
-        return Column {
-            Text(user.firstName)
-            Text(user.lastName)
-        }
-    }
-
-
-//    val viewModels: RealViewModels = GetViewModels(userId = userId, token = token)
-//
-//    val isLoading: Boolean by viewModels.mainViewModel.isLoading.collectAsState()
-//    val state: MainViewState by viewModels.mainViewModel.state.collectAsState()
-//
-//    val (selectedTab, setSelectedTab) = remember { mutableStateOf(MightyTabs.Dashboard) }
-//    val tabs = MightyTabs.values()
-//
-//    Scaffold(
-//        backgroundColor = MaterialTheme.colors.primarySurface,
-//        topBar = { MightyTopBar() },
-//        bottomBar = {
-//            BottomNavigation {
-//                tabs.forEach { tab ->
-//                    BottomNavigationItem(
-//                        icon = { Icon(imageVector = tab.icon, contentDescription = null) },
-//                        label = { Text(text = stringResource(id = tab.title)) },
-//                        selected = tab == selectedTab,
-//                        onClick = { setSelectedTab(tab) },
-//                        modifier = Modifier.navigationBarsPadding()
-//                    )
-//                }
-//            }
-//        }
-//    ) {
-//        when (selectedTab) {
-//            MightyTabs.Dashboard -> DashboardContent(viewModel = viewModels.dashboardViewModel)
-//            MightyTabs.Exercises -> ExercisesContent(viewModel = viewModels.exercisesViewModel)
-//        }
-//    }
 }
