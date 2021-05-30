@@ -11,9 +11,9 @@ private val DarkColorPalette = darkColors(
     primaryVariant = color_brand_accent_alt,
     secondary = color_fill_success,
     background = color_background_purple,
-    surface = color_gray_light,
+    surface = color_gray_dark,
     onBackground = color_gray_light,
-    onSurface = color_gray_dark
+    onSurface = color_gray_light,
 )
 
 private val LightColorPalette = lightColors(
