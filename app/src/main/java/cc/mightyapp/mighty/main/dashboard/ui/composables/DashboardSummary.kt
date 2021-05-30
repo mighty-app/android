@@ -1,22 +1,19 @@
 package cc.mightyapp.mighty.main.dashboard.ui.composables
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import cc.mightyapp.mighty.common.ui.composables.LevelGraphic
 import cc.mightyapp.mighty.main.main.data.entities.MightyUtil
-import com.google.accompanist.coil.LocalImageLoader
-import com.google.accompanist.coil.rememberCoilPainter
 
 @Composable
 fun DashboardSummary(
@@ -46,26 +43,6 @@ fun DashboardSummary(
 
             XpInfo(xp = xp, xpToNextLevel = xpToNextLevel)
         }
-    }
-}
-
-@Composable
-fun LevelGraphic(
-    graphicUri: String,
-    contentDescription: String? = null,
-    size: Int = 60,
-    mightyUtil: MightyUtil
-) {
-    CompositionLocalProvider(LocalImageLoader provides mightyUtil.imageLoader) {
-
-        Image(
-            painter = rememberCoilPainter(
-                request = graphicUri,
-                fadeIn = true,
-            ),
-            contentDescription = contentDescription,
-            modifier = Modifier.size(size.dp)
-        )
     }
 }
 
