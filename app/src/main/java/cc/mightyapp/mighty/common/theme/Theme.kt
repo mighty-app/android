@@ -14,6 +14,7 @@ private val DarkColorPalette = darkColors(
     surface = color_gray_dark,
     onBackground = color_gray_light,
     onSurface = color_gray_light,
+    onPrimary = color_purple_light
 )
 
 private val LightColorPalette = lightColors(
