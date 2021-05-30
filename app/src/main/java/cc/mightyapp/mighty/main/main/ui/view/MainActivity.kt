@@ -7,7 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import cc.mightyapp.mighty.common.theme.MightyTheme
+import cc.mightyapp.mighty.common.ui.theme.MightyTheme
 import cc.mightyapp.mighty.main.main.ui.composables.MainContent
 import com.google.accompanist.insets.ProvideWindowInsets
 import dagger.hilt.android.AndroidEntryPoint

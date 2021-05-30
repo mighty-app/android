@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
-import cc.mightyapp.mighty.common.theme.MightyTheme
+import cc.mightyapp.mighty.common.ui.theme.MightyTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 fun launchOnboardingActivity(context: Context) {

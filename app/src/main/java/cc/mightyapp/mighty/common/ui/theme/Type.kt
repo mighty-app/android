@@ -1,4 +1,4 @@
-package cc.mightyapp.mighty.common.theme
+package cc.mightyapp.mighty.common.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

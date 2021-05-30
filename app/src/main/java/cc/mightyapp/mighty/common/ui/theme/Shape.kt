@@ -1,4 +1,4 @@
-package cc.mightyapp.mighty.common.theme
+package cc.mightyapp.mighty.common.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

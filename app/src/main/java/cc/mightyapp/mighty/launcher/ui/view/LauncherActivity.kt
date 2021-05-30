@@ -3,7 +3,7 @@ package cc.mightyapp.mighty.launcher.ui.view
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import cc.mightyapp.mighty.common.theme.MightyTheme
+import cc.mightyapp.mighty.common.ui.theme.MightyTheme
 import cc.mightyapp.mighty.launcher.data.entities.LaunchDestination
 import cc.mightyapp.mighty.launcher.ui.composables.LauncherView
 import cc.mightyapp.mighty.main.main.ui.view.launchMainActivity
