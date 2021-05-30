@@ -12,8 +12,6 @@ enum class MightyTabs(
     val icon: ImageVector
 ) {
     Dashboard(R.string.tab_dashboard, FontAwesomeIcons.Solid.Rocket),
-    History(R.string.tab_history, FontAwesomeIcons.Solid.Clock),
     Workout(R.string.tab_start_workout, FontAwesomeIcons.Solid.Plus),
     Exercises(R.string.tab_exercises, FontAwesomeIcons.Solid.Dumbbell),
-    Settings(R.string.tab_settings, FontAwesomeIcons.Solid.Cog)
 }

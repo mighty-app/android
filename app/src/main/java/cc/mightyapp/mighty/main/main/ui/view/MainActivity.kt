@@ -9,8 +9,8 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import cc.mightyapp.mighty.common.theme.MightyTheme
 import cc.mightyapp.mighty.main.main.ui.composables.MainContent
+import com.google.accompanist.insets.ProvideWindowInsets
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 
 const val USER_ID = "cc.mightyapp.mighty.ui.main.USER_ID"
 const val TOKEN = "cc.mightyapp.mighty.ui.main.TOKEN"
@@ -36,9 +36,9 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MightyTheme {
-
-                MainContent(userId = userId!!, token = token!!)
-
+                ProvideWindowInsets {
+                    MainContent(userId = userId!!, token = token!!)
+                }
             }
 
         }
