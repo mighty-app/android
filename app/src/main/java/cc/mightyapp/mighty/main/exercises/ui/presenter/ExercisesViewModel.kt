@@ -3,6 +3,7 @@ package cc.mightyapp.mighty.main.exercises.ui.presenter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cc.mightyapp.mighty.common.data.entities.RequestResult
+import cc.mightyapp.mighty.common.data.fakes.FakeExercises
 import cc.mightyapp.mighty.common.data.models.Exercise
 import cc.mightyapp.mighty.main.exercises.data.domain.GetExercisesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +19,8 @@ class ExercisesViewModel @Inject constructor(
     private val getExercisesUseCase: GetExercisesUseCase
 ) : ViewModel() {
 
-    private val _exercises = MutableStateFlow(listOf<Exercise>())
+    private val _exercises =
+        MutableStateFlow(listOf(FakeExercises.BenchPress, FakeExercises.DumbbellCurl))
     val exercises: StateFlow<List<Exercise>>
         get() = _exercises
 
@@ -30,7 +32,8 @@ class ExercisesViewModel @Inject constructor(
         viewModelScope.launch {
             val exercises = withContext(Dispatchers.Default) { getExercisesUseCase(Unit) }
 
-            if (exercises is RequestResult.Success) _exercises.value = exercises.payload
+            if (exercises is RequestResult.Success && exercises.payload.isNotEmpty()) _exercises.value =
+                exercises.payload
         }
     }
 }
