@@ -1,4 +1,4 @@
-package cc.mightyapp.mighty.common.ui.composables
+package cc.mightyapp.mighty.common.ui.composables.graphics
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
