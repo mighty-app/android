@@ -13,7 +13,7 @@ object FakeExercises {
         instructions = "Lorem ipsum",
         muscles = listOf<Muscle>(FakeMuscles.Chest),
         images = listOf(),
-        xp = 2
+        xp = 5
     )
 
     val DumbbellCurl = Exercise(
