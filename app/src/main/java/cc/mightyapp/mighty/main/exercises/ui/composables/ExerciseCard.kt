@@ -12,9 +12,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import cc.mightyapp.mighty.common.data.entities.MightyEmoji
 import cc.mightyapp.mighty.common.data.fakes.FakeExercises
 import cc.mightyapp.mighty.common.data.models.Exercise
 import cc.mightyapp.mighty.common.ui.composables.components.MightyChip
+import cc.mightyapp.mighty.common.ui.composables.graphics.XpGraphic
+import cc.mightyapp.mighty.main.main.data.util.getExerciseTypeEmoji
 
 @Preview
 @Composable
@@ -25,7 +28,7 @@ fun ExerciseCard(
         modifier = Modifier
             .padding(10.dp)
             .clip(shape = RoundedCornerShape(10.dp))
-            .background(MaterialTheme.colors.surface)
+            .background(MaterialTheme.colors.primaryVariant)
             .fillMaxWidth()
             .padding(10.dp)
     ) {
@@ -35,29 +38,42 @@ fun ExerciseCard(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Text(
-                text = exercise.name,
-                style = MaterialTheme.typography.h6,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(4.dp)
-            )
 
-            Text(
-                text = "${exercise.xp} XP",
-                style = MaterialTheme.typography.h6,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(4.dp)
-            )
+            Row {
+                Text(
+                    text = getExerciseTypeEmoji(exerciseType = exercise.type),
+                    style = MaterialTheme.typography.h4,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(4.dp),
+                )
+
+                Text(
+                    text = exercise.name,
+                    style = MaterialTheme.typography.h4,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(4.dp),
+                    color = MaterialTheme.colors.primary
+                )
+            }
+
+            XpGraphic(xp = exercise.xp)
 
             Row {
 
                 exercise.muscles.forEach { muscle ->
-                    MightyChip(label = muscle.name)
+                    MightyChip(
+                        label = muscle.name,
+                        emoji = MightyEmoji.Flexing.unicodeStr
+                    )
                 }
 
-                MightyChip(label = exercise.equipment.name)
+                MightyChip(
+                    label = exercise.equipment.name,
+                    emoji = MightyEmoji.RunningShirt.unicodeStr
+                )
 
             }
         }
     }
 }
+

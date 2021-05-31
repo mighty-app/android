@@ -10,14 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import cc.mightyapp.mighty.common.data.entities.MightyEmoji
+import cc.mightyapp.mighty.common.data.fakes.FakeUsers
 
 @Preview
 @Composable
 fun DashboardGreeting(
-    firstName: String = "Mighty User"
+    firstName: String = FakeUsers.Tag.firstName
 ) {
     Row {
-        Text(text = "\uD83D\uDC4B", style = MaterialTheme.typography.h4)
+        Text(text = MightyEmoji.Waving.unicodeStr, style = MaterialTheme.typography.h4)
 
         Spacer(modifier = Modifier.padding(2.dp))
 

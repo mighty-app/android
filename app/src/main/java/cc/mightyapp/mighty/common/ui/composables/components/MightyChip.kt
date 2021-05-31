@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 fun MightyChip(
     isSelected: Boolean = false,
     label: String = "Mighty Chip",
+    emoji: String? = null,
     colorWhenSelected: Color = MaterialTheme.colors.secondary,
     colorWhenNotSelected: Color = MaterialTheme.colors.secondaryVariant,
 ) {
@@ -33,12 +34,20 @@ fun MightyChip(
             }
         )
     ) {
-        Row {
+        Row(modifier = Modifier.padding(6.dp)) {
+            if (!emoji.isNullOrEmpty()) {
+                Text(
+                    text = emoji,
+                    style = MaterialTheme.typography.body2,
+                    modifier = Modifier.padding(2.dp)
+                )
+            }
+
             Text(
                 text = label,
                 style = MaterialTheme.typography.body2,
                 color = Color.White,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(2.dp)
             )
         }
     }

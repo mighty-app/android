@@ -10,7 +10,7 @@ data class User(
     val googleId: String = "",
     val facebookId: String = "",
     val appleId: String = "",
-    val verified: Boolean = false,
+    val isVerified: Boolean = false,
     val workouts: List<Any> = listOf(),
     val xp: Int = 0,
     val poundsLiftedTotal: Int = 0,

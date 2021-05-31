@@ -12,6 +12,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import cc.mightyapp.mighty.common.data.fakes.FakeStats
+import cc.mightyapp.mighty.common.data.fakes.FakeUsers
 import cc.mightyapp.mighty.common.ui.composables.graphics.LevelGraphic
 import cc.mightyapp.mighty.main.main.data.entities.MightyUtil
 
@@ -49,7 +51,7 @@ fun DashboardSummary(
 @Preview
 @Composable
 fun ProgressBar(
-    percentComplete: Int = 25
+    percentComplete: Int = FakeStats.PercentComplete
 ) {
     val width = 300.dp
     val height = 50.dp
@@ -76,8 +78,8 @@ fun ProgressBar(
 @Preview
 @Composable
 fun XpInfo(
-    xp: Int = 25,
-    xpToNextLevel: Int = 74
+    xp: Int = FakeUsers.Tag.xp,
+    xpToNextLevel: Int = FakeStats.XpToNextLevel
 ) {
     val width = 300.dp
 
