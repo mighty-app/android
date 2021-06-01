@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import cc.mightyapp.mighty.common.data.fakes.FakeAchievements
+import cc.mightyapp.mighty.common.data.fakes.FakeUsers
 import cc.mightyapp.mighty.main.dashboard.ui.presenter.DashboardViewModel
 import cc.mightyapp.mighty.main.main.data.entities.MightyUtil
 import cc.mightyapp.mighty.main.main.ui.presenter.MainViewModel
@@ -34,5 +36,9 @@ fun DashboardContent(
             mightyUtil = mightyUtil
         )
 
+        DashboardAchievements(
+            achievements = FakeUsers.Tag.achievements,
+            mightyUtil = mightyUtil
+        )
     }
 }

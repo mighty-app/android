@@ -5,12 +5,12 @@ data class Routine(
     val description: String,
     val author: User,
 
-    val coverImage: String,
-    val program: Program,
+    val coverImage: String? = null,
+    val program: Program? = null,
 
     val templateSets: List<TemplateSet>,
 
-    val ratingAvg: Float,
+    val ratingAvg: Float? = null,
     val timeTargetInMins: Int,
     val usersFavoritedBy: List<User>
 )

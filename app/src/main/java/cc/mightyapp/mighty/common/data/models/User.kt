@@ -15,7 +15,7 @@ data class User(
     val xp: Int = 0,
     val poundsLiftedTotal: Int = 0,
     val level: String = "",
-    val achievements: List<Any> = listOf(),
+    val achievements: List<RealAchievement> = listOf(),
     val usersFollowing: List<Any> = listOf(),
     val usersFollowedBy: List<Any> = listOf(),
     val routinesFavorited: List<Any> = listOf(),

@@ -11,7 +11,7 @@ object FakeExercises {
         type = ExerciseType.Lifting,
         equipment = FakeEquipment.Barbell,
         instructions = "Lorem ipsum",
-        muscles = listOf<Muscle>(FakeMuscles.Chest),
+        muscles = listOf<Muscle>(FakeMuscles.Chest, FakeMuscles.Triceps, FakeMuscles.Shoulders),
         images = listOf(),
         xp = 5
     )
@@ -24,5 +24,45 @@ object FakeExercises {
         muscles = listOf(FakeMuscles.Biceps),
         images = listOf(),
         xp = 1
+    )
+
+    val Squat = Exercise(
+        name = "Squat",
+        type = ExerciseType.Lifting,
+        equipment = FakeEquipment.Barbell,
+        instructions = "Lorem ipsum",
+        muscles = listOf<Muscle>(FakeMuscles.Quads, FakeMuscles.Glutes, FakeMuscles.Hamstrings),
+        images = listOf(),
+        xp = 5
+    )
+
+    val Deadlift = Exercise(
+        name = "Deadlift",
+        type = ExerciseType.Lifting,
+        equipment = FakeEquipment.Barbell,
+        instructions = "Lorem ipsum",
+        muscles = listOf<Muscle>(FakeMuscles.Glutes, FakeMuscles.Hamstrings, FakeMuscles.Forearms),
+        images = listOf(),
+        xp = 5
+    )
+
+    val MilitaryPress = Exercise(
+        name = "Military Press",
+        type = ExerciseType.Lifting,
+        equipment = FakeEquipment.Barbell,
+        instructions = "Lorem ipsum",
+        muscles = listOf<Muscle>(FakeMuscles.Shoulders),
+        images = listOf(),
+        xp = 5
+    )
+
+    val BarbellRow = Exercise(
+        name = "Bench Press",
+        type = ExerciseType.Lifting,
+        equipment = FakeEquipment.Barbell,
+        instructions = "Lorem ipsum",
+        muscles = listOf<Muscle>(FakeMuscles.MiddleBack, FakeMuscles.Biceps),
+        images = listOf(),
+        xp = 5
     )
 }

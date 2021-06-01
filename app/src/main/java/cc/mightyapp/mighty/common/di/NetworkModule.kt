@@ -3,6 +3,7 @@ package cc.mightyapp.mighty.common.di
 import cc.mightyapp.mighty.common.data.api.MightyApi
 import cc.mightyapp.mighty.common.util.Constants
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -14,6 +15,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -47,6 +49,7 @@ object NetworkModule {
     @Singleton
     fun provideMoshi() = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
+        .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
         .build()
 
     @Provides
