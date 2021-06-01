@@ -1,9 +1,13 @@
 package cc.mightyapp.mighty.main.dashboard.ui.composables
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import cc.mightyapp.mighty.common.data.fakes.FakeAchievements
 import cc.mightyapp.mighty.common.data.models.RealAchievement
@@ -15,7 +19,13 @@ fun DashboardAchievements(
     achievements: List<RealAchievement>,
     mightyUtil: MightyUtil
 ) {
-    Box(modifier = Modifier.padding(10.dp)) {
+    Box(
+        modifier = Modifier
+            .padding(10.dp)
+            .clip(shape = RoundedCornerShape(10.dp))
+            .background(color = MaterialTheme.colors.primary)
+            .padding(10.dp)
+    ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround,

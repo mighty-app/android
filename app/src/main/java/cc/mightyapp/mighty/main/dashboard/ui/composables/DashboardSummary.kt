@@ -28,6 +28,7 @@ fun DashboardSummary(
 
     Row(
         modifier = Modifier
+            .padding(top = 10.dp)
             .fillMaxWidth()
             .padding(8.dp)
             .clip(shape = RoundedCornerShape(8.dp))
