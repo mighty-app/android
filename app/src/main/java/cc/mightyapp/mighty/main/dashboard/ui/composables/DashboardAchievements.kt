@@ -1,8 +1,11 @@
 package cc.mightyapp.mighty.main.dashboard.ui.composables
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import cc.mightyapp.mighty.common.data.fakes.FakeAchievements
 import cc.mightyapp.mighty.common.data.models.RealAchievement
 import cc.mightyapp.mighty.common.ui.composables.graphics.AchievementGraphic
 import cc.mightyapp.mighty.main.main.data.entities.MightyUtil
@@ -12,13 +15,18 @@ fun DashboardAchievements(
     achievements: List<RealAchievement>,
     mightyUtil: MightyUtil
 ) {
-    Box {
-        Row {
+    Box(modifier = Modifier.padding(10.dp)) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             achievements.forEach { achievement ->
                 AchievementGraphic(
-                    graphicUri = achievement.achievement?.graphic ?: "https://mighty-app.s3-us-west-1.amazonaws.com/badges/arcade_levels_1.svg",
-                    contentDescription = achievement.achievement?.description ?: null,
-                    size = 40,
+                    graphicUri = achievement.achievement?.graphic
+                        ?: FakeAchievements.Completed1Workout.graphic,
+                    contentDescription = achievement.achievement?.description,
+                    size = 120,
                     mightyUtil = mightyUtil
                 )
             }
