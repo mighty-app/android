@@ -28,7 +28,8 @@ object FakeUsers {
         level = FakeLevels.LevelOne.id,
         achievements = listOf(
             FakeRealAchievements.TagCompleted1Workout,
-            FakeRealAchievements.TagCompleted3Workouts
+            FakeRealAchievements.TagCompleted3Workouts,
+            FakeRealAchievements.TagCompleted10Workouts
         )
     )
 }

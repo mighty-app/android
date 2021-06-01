@@ -21,4 +21,12 @@ object FakeRealAchievements {
         set = null,
         timestamp = OtherFakeInfo.EndTime
     )
+
+    val TagCompleted10Workouts = RealAchievement(
+        achievement = FakeAchievements.Completed10Workouts,
+        user = fakeTag,
+        workout = FakeWorkouts.TagWorkoutThree,
+        set = null,
+        timestamp = OtherFakeInfo.EndTime
+    )
 }
