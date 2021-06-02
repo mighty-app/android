@@ -30,6 +30,9 @@ object FakeUsers {
             FakeRealAchievements.TagCompleted1Workout,
             FakeRealAchievements.TagCompleted3Workouts,
             FakeRealAchievements.TagCompleted10Workouts
+        ),
+        routinesFavorited = listOf(
+            FakeRoutines.StrongLiftsA
         )
     )
 }
