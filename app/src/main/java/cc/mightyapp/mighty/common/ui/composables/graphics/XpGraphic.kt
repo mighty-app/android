@@ -4,15 +4,17 @@ import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import cc.mightyapp.mighty.common.data.fakes.FakeExercises
-import cc.mightyapp.mighty.common.data.fakes.FakeUsers
-import cc.mightyapp.mighty.main.main.data.util.getXpGraphicId
+import cc.mightyapp.mighty.R
+import cc.mightyapp.mighty.common.data.fakes.OtherFakeInfo
 
 @Preview
 @Composable
-fun XpGraphic(xp: Int = FakeExercises.BenchPress.xp) {
+fun XpGraphic(
+    id: Int = R.mipmap.ic_xp_gold_foreground,
+    contentDescription: String? = OtherFakeInfo.GoldXpTokenContentDescription
+) {
     Image(
-        painter = painterResource(id = getXpGraphicId(xp = xp)),
-        contentDescription = "$xp XP token"
+        painter = painterResource(id = id),
+        contentDescription = contentDescription
     )
 }

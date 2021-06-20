@@ -3,6 +3,7 @@ package cc.mightyapp.mighty.common.data.api.services
 import cc.mightyapp.mighty.common.data.api.MightyApi
 import cc.mightyapp.mighty.common.data.entities.RequestResult
 import cc.mightyapp.mighty.common.data.models.Level
+import cc.mightyapp.mighty.common.data.models.Routine
 import cc.mightyapp.mighty.common.data.models.User
 import cc.mightyapp.mighty.main.main.data.entities.GetUserInput
 import kotlinx.coroutines.CoroutineDispatcher
@@ -18,6 +19,9 @@ class RealUserService @Inject constructor(
     override suspend fun getUser(input: GetUserInput): User =
         withContext(ioDispatcher) { api.getUser(id = input.userId) }
 
-    override suspend fun getUserLevel(levelId: String): Level =
-        withContext(ioDispatcher) { api.getLevel(levelId = levelId)}
+    override suspend fun getUserLevel(userId: String): Level =
+        withContext(ioDispatcher) { api.getUserLevel(userId = userId) }
+
+    override suspend fun getUserFavoriteRoutines(userId: String): List<Routine> =
+        withContext(ioDispatcher) { api.getUserFavoriteRoutines(id = userId) }
 }

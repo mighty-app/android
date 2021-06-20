@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import cc.mightyapp.mighty.common.data.fakes.FakeAchievements
 import cc.mightyapp.mighty.common.data.fakes.FakeUsers
 import cc.mightyapp.mighty.main.dashboard.ui.presenter.DashboardViewModel
 import cc.mightyapp.mighty.main.main.data.entities.MightyUtil
@@ -18,7 +17,7 @@ fun DashboardContent(
 
 ) {
     val user by mainViewModel.user.collectAsState()
-    val level by dashboardViewModel.level.collectAsState()
+    val level by mainViewModel.level.collectAsState()
 
     if (user.isLoggedIn.not().or(level.graphic.isEmpty())) return
 

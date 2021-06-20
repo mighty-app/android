@@ -23,7 +23,7 @@ class DashboardViewModel @Inject constructor(
         get() = _level
 
     fun dashboardInit(levelId: String) {
-        loadLevel(levelId = "607d965abd1c9fadaa88f2ff")
+
     }
 
     private fun loadLevel(levelId: String) {

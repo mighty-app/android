@@ -23,6 +23,7 @@ import cc.mightyapp.mighty.main.main.data.entities.MightyTabs
 import cc.mightyapp.mighty.main.main.data.entities.MightyUtil
 import cc.mightyapp.mighty.main.main.data.util.generateMightyUtil
 import cc.mightyapp.mighty.main.main.ui.presenter.MainViewModel
+import cc.mightyapp.mighty.main.workout.ui.composables.StartWorkoutContent
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import com.google.accompanist.insets.navigationBarsPadding
@@ -84,6 +85,11 @@ fun MainContent(userId: String, token: String, context: Context) {
             MightyTabs.Exercises -> ExercisesContent(
                 mainViewModel = mainViewModel,
                 exercisesViewModel = exercisesViewModel
+            )
+
+            MightyTabs.Workout -> StartWorkoutContent(
+                mainViewModel = mainViewModel,
+                mightyUtil = mightyUtil
             )
         }
     }

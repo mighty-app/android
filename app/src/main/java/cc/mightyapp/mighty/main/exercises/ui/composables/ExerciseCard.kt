@@ -1,7 +1,9 @@
 package cc.mightyapp.mighty.main.exercises.ui.composables
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -16,7 +18,6 @@ import cc.mightyapp.mighty.common.data.entities.MightyEmoji
 import cc.mightyapp.mighty.common.data.fakes.FakeExercises
 import cc.mightyapp.mighty.common.data.models.Exercise
 import cc.mightyapp.mighty.common.ui.composables.components.MightyChip
-import cc.mightyapp.mighty.common.ui.composables.graphics.XpGraphic
 import cc.mightyapp.mighty.main.main.data.util.getExerciseTypeEmoji
 
 @Preview
@@ -39,7 +40,7 @@ fun ExerciseCard(
                 .fillMaxWidth()
         ) {
 
-            Row {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = getExerciseTypeEmoji(exerciseType = exercise.type),
                     style = MaterialTheme.typography.h4,
@@ -49,16 +50,14 @@ fun ExerciseCard(
 
                 Text(
                     text = exercise.name,
-                    style = MaterialTheme.typography.h4,
+                    style = MaterialTheme.typography.h3,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(4.dp),
                     color = MaterialTheme.colors.primary
                 )
             }
 
-            XpGraphic(xp = exercise.xp)
-
-            Row {
+            Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
 
                 exercise.muscles.forEach { muscle ->
                     MightyChip(

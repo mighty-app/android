@@ -12,4 +12,6 @@ object OtherFakeInfo {
     val EndTime = Date(2018,7,3,8,45,0)
 
     val RandomTime = Date(2018,7,3,8,12,33)
+
+    val GoldXpTokenContentDescription = "Gold XP Token"
 }
