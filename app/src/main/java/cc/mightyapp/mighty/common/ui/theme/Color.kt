@@ -30,3 +30,7 @@ val color_fill_info = Color(0xFF1E69FF)
 val color_fill_warn = Color(0xFFFDCA61)
 val color_fill_alert = Color(0xFFE81B16)
 val color_fill_success = Color(0xFF3CE3C9)
+
+val color_gold_light = Color(0xFFF9F295)
+val color_gold = Color(0xFFE0AA3E)
+val color_gold_dark = Color(0xFFB08A44)
