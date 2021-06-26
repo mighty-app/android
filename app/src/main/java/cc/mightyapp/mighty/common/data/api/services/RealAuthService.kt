@@ -16,7 +16,7 @@ class RealAuthService @Inject constructor(
     private val api: MightyApi,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : AuthService {
-    override suspend fun logInWithEmail(input: LogInWithEmailInput): RequestResult<LogInWithEmailResponse, Exception> =
+    override suspend fun logInWithEmail(input: LogInWithEmailInput): LogInWithEmailResponse =
         withContext(ioDispatcher) {
             api.logInWithEmail(input)
         }

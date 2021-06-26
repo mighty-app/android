@@ -1,9 +1,12 @@
 package cc.mightyapp.mighty.main.dashboard.ui.composables
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Button
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.navigation.NavController
 import cc.mightyapp.mighty.common.data.fakes.FakeUsers
 import cc.mightyapp.mighty.main.dashboard.ui.presenter.DashboardViewModel
 import cc.mightyapp.mighty.main.main.data.entities.MightyUtil
@@ -13,7 +16,9 @@ import cc.mightyapp.mighty.main.main.ui.presenter.MainViewModel
 fun DashboardContent(
     mainViewModel: MainViewModel,
     dashboardViewModel: DashboardViewModel,
-    mightyUtil: MightyUtil
+    mightyUtil: MightyUtil,
+    navController: NavController,
+    onClick: () -> Unit
 
 ) {
     val user by mainViewModel.user.collectAsState()
@@ -39,5 +44,9 @@ fun DashboardContent(
             achievements = FakeUsers.Tag.achievements,
             mightyUtil = mightyUtil
         )
+
+        Button(onClick = { onClick() }) {
+            Text(text = "Click Me")
+        }
     }
 }

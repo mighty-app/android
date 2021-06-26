@@ -19,7 +19,7 @@ interface MightyApi {
     @POST("/auth/login/email")
     suspend fun logInWithEmail(
         @Body input: LogInWithEmailInput
-    ): RequestResult<LogInWithEmailResponse, Exception>
+    ): LogInWithEmailResponse
 
     @POST("/auth/token/validate")
     suspend fun validateToken(

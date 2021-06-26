@@ -73,16 +73,16 @@ fun LogInWithEmailContent(
 
             Spacer(Modifier.size(padding))
 
-//            LogInButton(
-//                onClick = {
-//                    viewModel.logInWithEmail(
-//                        LogInWithEmailInput(
-//                            email,
-//                            password
-//                        )
-//                    )
-//                }
-//            )
+            LogInButton(
+                onClick = {
+                    viewModel.logInWithEmail(
+                        LogInWithEmailInput(
+                            email,
+                            password
+                        )
+                    )
+                }
+            )
         }
     }
 }

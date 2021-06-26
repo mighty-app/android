@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import cc.mightyapp.mighty.common.data.fakes.FakeRoutines
 import cc.mightyapp.mighty.common.data.models.Routine
@@ -26,6 +27,7 @@ import cc.mightyapp.mighty.common.ui.theme.GoldHorizontalGradient
 import cc.mightyapp.mighty.common.ui.theme.color_gold
 import cc.mightyapp.mighty.common.ui.theme.color_gold_dark
 import cc.mightyapp.mighty.common.ui.theme.color_gold_light
+import cc.mightyapp.mighty.main.dashboard.data.entities.MightyDestination
 import cc.mightyapp.mighty.main.main.data.entities.MightyUtil
 import cc.mightyapp.mighty.main.main.ui.presenter.MainViewModel
 import cc.mightyapp.mighty.main.workout.data.util.RealRoutineUtil
@@ -33,12 +35,17 @@ import cc.mightyapp.mighty.main.workout.data.util.RealRoutineUtil
 @Composable
 fun StartWorkoutContent(
     mainViewModel: MainViewModel,
-    mightyUtil: MightyUtil
+    mightyUtil: MightyUtil,
+    onStartEmptyWorkout: () -> Unit
 ) {
     val user by mainViewModel.user.collectAsState()
     val favoriteRoutines by mainViewModel.favoriteRoutines.collectAsState()
 
     Column {
+
+        Button(onClick = { onStartEmptyWorkout() }) {
+            Text(text = "Start Empty Workout")
+        }
 
         MyRoutinesContent(
             routines = listOf(
@@ -62,6 +69,8 @@ fun MyRoutinesContent(
         FakeRoutines.StrongLiftsA,
     )
 ) {
+
+
     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
         routines.forEach { routine ->
             RoutineCard(routine = routine)

@@ -35,24 +35,34 @@ class LauncherViewModel @Inject constructor(
 
     private fun loadState() {
         viewModelScope.launch {
-            combine(
-                readUserIdUseCase(Unit),
-                readTokenUseCase(Unit)
-            ) { userId, token ->
-                LauncherViewState(
-                    userId = if (userId is RequestResult.Success) userId.payload else "",
-                    token = if (token is RequestResult.Success) token.payload else ""
-                )
-            }.catch { e ->
-                Timber.d(e)
-                hasError.value = true
+
+            try {
+
+                val userId = readUserIdUseCase(Unit).first()
+                val token = readTokenUseCase(Unit).first()
+
+                if (userId is RequestResult.Success && token is RequestResult.Success) {
+                    _state.value = LauncherViewState(
+                        userId = userId.payload,
+                        token = token.payload
+                    )
+
+                    _destination.value = LaunchDestination.MAIN
+                    isDoneLoading.value = true
+                } else {
+                    _state.value = LauncherViewState(userId = "", token = "")
+                    _destination.value = LaunchDestination.ONBOARDING
+                    isDoneLoading.value = true
+                }
+
+            } catch (throwable: Throwable) {
+
+                _state.value = LauncherViewState(userId = "", token = "")
                 _destination.value = LaunchDestination.ONBOARDING
                 isDoneLoading.value = true
-            }.collect {
-                _state.value = it
-                _destination.value = LaunchDestination.MAIN
-                isDoneLoading.value = true
+
             }
+
 
         }
     }

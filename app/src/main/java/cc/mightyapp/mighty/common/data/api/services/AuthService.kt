@@ -9,7 +9,7 @@ import cc.mightyapp.mighty.onboarding.data.entities.LogInWithEmailResponse
 
 interface AuthService {
 
-    suspend fun logInWithEmail(input: LogInWithEmailInput): RequestResult<LogInWithEmailResponse, Exception>
+    suspend fun logInWithEmail(input: LogInWithEmailInput): LogInWithEmailResponse
 
     suspend fun validateToken(input: ValidateTokenInput): RequestResult<ValidateTokenResponse, Exception>
 }

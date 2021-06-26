@@ -9,6 +9,6 @@ import javax.inject.Inject
 class RealOnboardingRepository @Inject constructor(
     private val authService: AuthService
 ) : OnboardingRepository {
-    override suspend fun logInWithEmail(input: LogInWithEmailInput): RequestResult<LogInWithEmailResponse, Exception> =
+    override suspend fun logInWithEmail(input: LogInWithEmailInput): LogInWithEmailResponse =
         authService.logInWithEmail(input)
 }

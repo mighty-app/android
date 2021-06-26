@@ -11,8 +11,6 @@ interface RoutineUtil {
     fun getTotalXp(): Int
 
     fun getImageUri(authorId: String, totalXp: Int): Int
-
-    fun getBgImageUri(authorId: String, totalXp: Int): Int
 }
 
 class RealRoutineUtil(
@@ -51,15 +49,4 @@ class RealRoutineUtil(
             else -> R.mipmap.ic_xp_purple_foreground
         }
     }
-
-    override fun getBgImageUri(authorId: String, totalXp: Int): Int {
-        return when {
-            authorId == "1" -> R.mipmap.ic_gold_bg_foreground
-            totalXp in 0..50 -> R.mipmap.ic_xp_gold_foreground
-            totalXp in 50..100 -> R.mipmap.ic_xp_gold_foreground
-            else -> R.mipmap.ic_xp_gold_foreground
-        }
-    }
-
-
 }
